@@ -34,9 +34,14 @@ class Admin::UsersController < AdminsController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to admin_users_path
-    #redirect_to movies_path
+   
+    respond_to do |format|
+      if @user.destroy
+        UserMailer.admin_user_delete_email(@user).deliver
+        format.html{redirect_to admin_users_path, notice: 'User was successfully nuked.' }
+      end
+    end
+
   end
 
   protected
