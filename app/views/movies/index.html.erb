@@ -1,32 +1,22 @@
 <section>
-  <p class="title">Search Movies</p>
+  <p class="subtitle">Search Movies</p>
   <form>
     <%= form_tag movies_path, method: :get do %>
       <p class="control">
-        <%= label_tag(:title, "Title:") %>
+        <%= label_tag(:search, "Search:") %>
         <%= text_field_tag(
-          :title, 
-          params[:title], 
+          :search, 
+          params[:search], 
           class: 'input',
-          placeholder: 'title') %>
-      </p>
-
-      <p class="control">
-        <%= label_tag(:director, "Director:") %>
-        <%= text_field_tag(
-        :director, 
-        params[:director],
-        class: 'input',
-        placeholder: 'director'
-        ) %>
+          placeholder: 'title or director') %>
       </p>
 
       <p class="control">
         <%= label_tag(:runtime_in_minutes, "Duration:") %>
-        <% @options=['Under 90 minutes','Between 90 and 120 minutes', 'Over 120 minutes'] %>
+        <% @options=['','Under 90 minutes','Between 90 and 120 minutes', 'Over 120 minutes'] %>
         <%= select_tag(
           :runtime_in_minutes, 
-          options_for_select([""] + @options.to_a),
+          options_for_select(@options.to_a),
           class: 'input select'
           )
         %>
@@ -40,6 +30,7 @@
   </form>
 </section>
 <hr>
+
 <section>
   <% @movies.each do |movie| %>
 
