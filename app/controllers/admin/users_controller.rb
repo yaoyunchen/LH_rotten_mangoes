@@ -4,10 +4,6 @@ class Admin::UsersController < AdminsController
     @users = User.where.not(id: current_user.id)
   end
 
-  # def show
-
-  # end
-
   def new
     @user = User.new
   end
@@ -20,7 +16,7 @@ class Admin::UsersController < AdminsController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admins_users_path, notice: "#{@user.full_name} added."
+      redirect_to admin_users_path, notice: "#{@user.full_name} added."
     else
       render :new
     end
@@ -39,7 +35,7 @@ class Admin::UsersController < AdminsController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path(@user)
+    redirect_to admin_users_path
     #redirect_to movies_path
   end
 
@@ -50,7 +46,8 @@ class Admin::UsersController < AdminsController
         :firstname,
         :lastname, 
         :password,
-        :password_cofirmation
+        :password_cofirmation,
+        :admin
       )
     end
 
