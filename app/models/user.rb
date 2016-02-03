@@ -1,10 +1,13 @@
 class User < ActiveRecord::Base
-  has_many :reviews
+  has_many :reviews,  dependent: :destroy
   
+  max_paginates_per 10
+
   has_secure_password
 
   validates :email,
-    presence: true
+    presence: true,
+    uniqueness: true
 
   validates :firstname,
     presence: true

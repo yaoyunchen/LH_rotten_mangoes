@@ -1,8 +1,12 @@
-class UsersController < ApplicationController
+class Admin::UsersController < AdminsController
 
-  def show
-    @user = User.find(params[:id])
+  def index
+    @users = User.where.not(id: current_user.id)
   end
+
+  # def show
+
+  # end
 
   def new
     @user = User.new
@@ -16,20 +20,27 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to movies_path, notice: "Welcome aboard, #{@user.firstname}"
+      redirect_to admins_users_path, notice: "#{@user.full_name} added."
     else
       render :new
     end
+
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to user_path(@user)
+      redirect_to admin_users_path, notice: "#{@user.full_name} updated."
     else
       render :edit
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to admin_users_path(@user)
+    #redirect_to movies_path
   end
 
   protected
@@ -42,4 +53,5 @@ class UsersController < ApplicationController
         :password_cofirmation
       )
     end
+
 end
