@@ -1,0 +1,23 @@
+<% @movies.each do |movie| %>
+  <table>
+   <thead>
+    <tr>
+     <th></th>
+     <th>Title</th>
+     <th>Release Date</th>
+     <th>Director</th>
+     <th>Runtime</th>
+    </tr>
+   </thead>
+
+   <tbody>
+    <tr>
+      <td> <%= image_tag movie.image.thumb.url %> </td>
+      <td> <%= link_to movie.title, movie_path(movie) %> </td>
+      <td> <%= formatted_date(movie.release_date) %> </td>
+      <td> <%= movie.director %> </td>
+      <td> <%= movie.runtime_in_minutes %> minutes </td>
+    </tr>
+   </tbody>
+ </table>
+<% end %>

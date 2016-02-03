@@ -32,26 +32,7 @@
 <hr>
 
 <section>
-  <% @movies.each do |movie| %>
-
-    <h2>
-      <%= image_tag movie.image.thumb.url %><%= link_to movie.title, movie_path(movie) %>
-    </h2>
-
-    <h3>
-      <%= movie.release_date %>
-    </h3>
-
-    <h4>
-      Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes 
-    </h4>
-    
-    <p>
-    <%= movie.description %>
-    </p>
-    <hr>
-  <% end %>
-
+ <%= render 'movie' %>
 </section>
 
 <section>
