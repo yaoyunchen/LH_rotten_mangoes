@@ -1,36 +1,70 @@
-<% link_to "Submit a movie!", new_movie_path %>
+<section>
+  <p class="title">Search Movies</p>
+  <form>
+    <%= form_tag movies_path, method: :get do %>
+      <p class="control">
+        <%= label_tag(:title, "Title:") %>
+        <%= text_field_tag(
+          :title, 
+          params[:title], 
+          class: 'input',
+          placeholder: 'title') %>
+      </p>
+
+      <p class="control">
+        <%= label_tag(:director, "Director:") %>
+        <%= text_field_tag(
+        :director, 
+        params[:director],
+        class: 'input',
+        placeholder: 'director'
+        ) %>
+      </p>
+
+      <p class="control">
+        <%= label_tag(:runtime_in_minutes, "Duration:") %>
+        <% @options=['Under 90 minutes','Between 90 and 120 minutes', 'Over 120 minutes'] %>
+        <%= select_tag(
+          :runtime_in_minutes, 
+          options_for_select([""] + @options.to_a),
+          class: 'input select'
+          )
+        %>
+      </p>
+      <p class="control">
+        <%= submit_tag(
+        "Search",
+        class: 'button') %>
+      </p>
+  <% end %>
+  </form>
+</section>
 <hr>
-<h3>Search Movies</h3>
-<%= form_tag movies_path, method: :get do %>
+<section>
+  <% @movies.each do |movie| %>
 
-  <%= label_tag(:title, "Title:") %>
-  <%= text_field_tag(:title, params[:title]) %><br>
+    <h2>
+      <%= image_tag movie.image.thumb.url %><%= link_to movie.title, movie_path(movie) %>
+    </h2>
 
-  <%= label_tag(:director, "Director:") %>
-  <%= text_field_tag(:director, params[:director]) %><br>
+    <h3>
+      <%= movie.release_date %>
+    </h3>
 
-  <%= label_tag(:runtime_in_minutes, "Duration:") %>
-  <% @options=['Under 90 minutes','Between 90 and 120 minutes', 'Over 120 minutes'] %>
-  <%= select_tag :runtime_in_minutes,  options_for_select([""] + @options.to_a) %><br>
-  <%= submit_tag("Search") %>
-<% end %>
+    <h4>
+      Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes 
+    </h4>
+    
+    <p>
+    <%= movie.description %>
+    </p>
+    <hr>
+  <% end %>
 
-<% @movies.each do |movie| %>
+</section>
 
-  <h2>
-    <%= image_tag movie.image.thumb.url %><%= link_to movie.title, movie_path(movie) %>
-  </h2>
+<section>
+  <%= link_to "Submit a movie!", new_movie_path %>
+</section>
 
-  <h3>
-    <%= movie.release_date %>
-  </h3>
 
-  <h4>
-    Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes 
-  </h4>
-  
-  <p>
-  <%= movie.description %>
-  </p>
-  <hr>
-<% end %>
