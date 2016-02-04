@@ -1,3 +1,6 @@
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,8 +13,25 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bulma
  *= require_tree .
  *= require_self
  */
+
+.no-padding
+  padding: 0
+  margin: 0
+
+.btn-gray
+  background-color: #cccccc
+  color: #FFFFFF
+
+.btn-darkgray
+  background-color: #404040
+  color: #FFFFFF
+  &:hover
+    color: #cccccc
+
+body
+  padding-top: 70px
+  padding-bottom: 50px
 

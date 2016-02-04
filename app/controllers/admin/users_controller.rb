@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminsController
-
+  
   def index
-    @users = User.where.not(id: current_user.id)
+    @users = User.where.not(id: current_user.id).page(params[:page])
   end
 
   def new
@@ -16,7 +16,8 @@ class Admin::UsersController < AdminsController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admin_users_path, notice: "#{@user.full_name} added."
+      flash[:success] = "#{@user.full_name} added."
+      redirect_to admin_users_path
     else
       render :new
     end
@@ -26,7 +27,8 @@ class Admin::UsersController < AdminsController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to admin_users_path, notice: "#{@user.full_name} updated."
+      flash[:success] = "#{@user.full_name} updated."
+      redirect_to admin_users_path 
     else
       render :edit
     end
@@ -38,7 +40,8 @@ class Admin::UsersController < AdminsController
     respond_to do |format|
       if @user.destroy
         UserMailer.admin_user_delete_email(@user).deliver
-        format.html{redirect_to admin_users_path, notice: 'User was successfully nuked.' }
+        flash[:success] = 'User was successfully nuked.'
+        format.html{redirect_to admin_users_path}
       end
     end
 

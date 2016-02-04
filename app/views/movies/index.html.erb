@@ -1,42 +1,26 @@
-<section>
-  <p class="subtitle">Search Movies</p>
-  <form>
-    <%= form_tag movies_path, method: :get do %>
-      <p class="control">
-        <%= label_tag(:search, "Search:") %>
-        <%= text_field_tag(
-          :search, 
-          params[:search], 
-          class: 'input',
-          placeholder: 'title or director') %>
-      </p>
+<div class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-heading no-padding">
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapse_one" class="btn btn-darkgray btn-block panel-title">Search</a>
+    </div>
+    <div id="collapse_one" class="panel-collapse collapse">
+      <div class="panel-body">
+        <%= render './movies/search' %>
+      </div>
+    </div>
 
-      <p class="control">
-        <%= label_tag(:runtime_in_minutes, "Duration:") %>
-        <% @options=['','Under 90 minutes','Between 90 and 120 minutes', 'Over 120 minutes'] %>
-        <%= select_tag(
-          :runtime_in_minutes, 
-          options_for_select(@options.to_a),
-          class: 'input select'
-          )
-        %>
-      </p>
-      <p class="control">
-        <%= submit_tag(
-        "Search",
-        class: 'button') %>
-      </p>
-  <% end %>
-  </form>
-</section>
-<hr>
+    <div class="panel-heading no-padding">
+      <%= link_to "Submit a movie!", new_movie_path,
+        class: "btn btn-darkgray btn-block panel-title"
+      %>
+    </div>
+  </div>
+</div>
 
-<section>
- <%= render 'movie' %>
-</section>
+<%= render 'movie' %>
 
-<section>
-  <%= link_to "Submit a movie!", new_movie_path %>
-</section>
+  
+</div>
+
 
 

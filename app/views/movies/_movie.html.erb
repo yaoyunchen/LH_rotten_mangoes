@@ -1,23 +1,61 @@
-<% @movies.each do |movie| %>
-  <table>
-   <thead>
+<table class="table table-hover">
+  <thead>
     <tr>
-     <th></th>
-     <th>Title</th>
-     <th>Release Date</th>
-     <th>Director</th>
-     <th>Runtime</th>
+      <th> </th>
+      <th>Title</th>
+      <th>Release Date</th>
+      <th>Director</th>
+      <th>Runtime</th>
+      <th>Description</th>
     </tr>
    </thead>
-
-   <tbody>
+  <tfoot>
     <tr>
-      <td> <%= image_tag movie.image.thumb.url %> </td>
-      <td> <%= link_to movie.title, movie_path(movie) %> </td>
-      <td> <%= formatted_date(movie.release_date) %> </td>
-      <td> <%= movie.director %> </td>
-      <td> <%= movie.runtime_in_minutes %> minutes </td>
+      <td> </td>
+      <td>Title</td>
+      <td>Release Date</td>
+      <td>Director</td>
+      <td>Runtime</td>
+      <td>Description</td>
     </tr>
-   </tbody>
- </table>
-<% end %>
+   </tfoot>
+   <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td>
+          <% if movie.image? %>
+            <% img = "<img src ='#{movie.image.resized.url}'/>" %>
+            <button type="button" class="btn btn-link has-popover" data-html="true" data-content="<%= img %>"><%= image_tag movie.image.thumb.url %></button>
+          <% end %>
+        </td>
+        <td><%= link_to movie.title, movie_path(movie) %></td>
+        <td><%= formatted_date(movie.release_date) %></td>
+        <td> <%= movie.director %> </td>
+        <td> <%= movie.runtime_in_minutes %> minutes </td>
+        <td>
+          <% if movie.description? %>
+            <button class="btn btn-gray" data-toggle="modal" data-target="#movie-<%= movie.id %>-description">
+              View Description
+            </button>
+            <div class="modal fade" id="movie-<%= movie.id %>-description" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="todo-<%= movie.id %>-movie">Description</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= movie.description %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate(@movies) %>

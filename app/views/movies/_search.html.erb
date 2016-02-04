@@ -1,0 +1,30 @@
+<form role="form" class="form-inline">
+    <%= form_tag movies_path, method: :get do %>
+      <div class="form-group">
+        <i class="glyphicon glyphicon-search"></i>
+         <%= label_tag(:search, "Title or Director") %>
+        <%= text_field_tag(
+          :search, 
+          params[:search], 
+          class: 'form-control',
+          placeholder: 'title or director') %>
+      </div>
+
+      <div class="form-group">
+        <i class="glyphicon glyphicon-time"></i>
+        <%= label_tag(:runtime_in_minutes, "Duration:") %>
+        <% @options=['','Under 90 minutes','Between 90 and 120 minutes', 'Over 120 minutes'] %>
+        <%= select_tag(
+          :runtime_in_minutes, 
+          options_for_select(@options.to_a),
+          class: 'form-control'
+          )
+        %>
+      </div>
+      
+      <%= submit_tag(
+        "Search",
+        class: 'btn btn-default') %>
+      
+  <% end %>
+  </form>

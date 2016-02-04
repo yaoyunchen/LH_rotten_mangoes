@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   has_many :reviews,  dependent: :destroy
-  
-  max_paginates_per 10
 
   has_secure_password
 

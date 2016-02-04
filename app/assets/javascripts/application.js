@@ -13,4 +13,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.turbolinks
+//= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function() {
+  $('.has-tooltip').tooltip();
+  $('.has-popover').popover({
+    trigger: 'hover',
+    animation: true,
+    container: 'body'
+  });
+});
+
+
+window.setTimeout(function() {
+    $(".alert-dismissible").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 3000);

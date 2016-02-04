@@ -1,4 +1,8 @@
 class Movie < ActiveRecord::Base
+  mount_uploader :image, ImageUploader
+
+  has_many :reviews
+  
   scope :search, -> (search) {where("title like ? OR director like ?", "%#{search}%", "%#{search}%")}
   scope :duration, -> (runtime_in_minutes) {
     if runtime_in_minutes.nil?
@@ -6,18 +10,14 @@ class Movie < ActiveRecord::Base
     else
       case runtime_in_minutes 
       when 'Under 90 minutes'
-        where("runtime_in_minutes < 90")
+        where("runtime_in_minutes < 90").order(runtime_in_minutes: :desc)
       when 'Between 90 and 120 minutes'
-        where("runtime_in_minutes >= 90 AND runtime_in_minutes < 120")
+        where("runtime_in_minutes >= 90 AND runtime_in_minutes < 120").order(runtime_in_minutes: :desc)
       when 'Over 120 minutes'
-        where("runtime_in_minutes >= 120")
+        where("runtime_in_minutes >= 120").order(runtime_in_minutes: :desc)
       end
     end
   }
-
-  mount_uploader :image, ImageUploader
-
-  has_many :reviews
   
   validates :title,
     presence: true
