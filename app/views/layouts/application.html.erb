@@ -3,13 +3,15 @@
 <head>
   <title>Rotten Mangoes</title>
 
-  <link rel="shortcut icon" type="image/x-icon" href="/public/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+
 </head>
 <body>
   <%= render 'layouts/navbar' %>
@@ -19,7 +21,8 @@
       content.each do |item| %>
         <%= render 'layouts/alert', 
           type: type,
-          content: item %>
+          content: item 
+      %>
       <% end %>
     <% else %>
       <%= render 'layouts/alert', 

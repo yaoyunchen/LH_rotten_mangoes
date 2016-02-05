@@ -24,14 +24,76 @@
 .btn-gray
   background-color: #cccccc
   color: #FFFFFF
+  &:hover
+    opacity: 0.8
 
 .btn-darkgray
   background-color: #404040
   color: #FFFFFF
   &:hover
+    opacity: 0.8
     color: #cccccc
+
 
 body
   padding-top: 70px
   padding-bottom: 50px
+  background-image: url('/images/grayscale.jpg')
+  position: relative
+  margin: 0
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  color: white
+
+.dropdown-menu
+  background-color: #212121
+  color:  #FFFFFF
+
+#cust-navbar
+  background-color: #000000
+  color: #ffffff
+
+
+.recent_added 
+  color: #fff
+  text-align: center
+
+.out_center
+  text-align: center
+  .in_center
+    margin: auto
+  
+
+
+/* Carousel base class */
+.carousel 
+  margin-bottom: 25px
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption 
+  z-index: 1
+
+
+/* Declare heights because of positioning of img element */
+.carousel .item 
+  height: 350px
+
+.carousel img 
+  top: 0
+  left: 0
+  height: 250px
+
+
+tbody tr:hover td, .table-hover tbody tr:hover th 
+  opacity: 0.6
+
+.form-group
+  background-color: transparent
+  color: black
+
+
+.text-muted
+  color: white
 

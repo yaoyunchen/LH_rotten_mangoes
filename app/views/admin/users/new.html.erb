@@ -1,42 +1,64 @@
-<h1>Sign Up</h1>
-<%= form_for [:admin, @user] do |f| %>
-  <% if @user.errors.any? %>
-    <div>
-      <%= pluralize(@user.errors.count, "error") %> prevented the account from being created:
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+<form class="container-fluid">
+  <%= form_for [:admin, @user] do |f| %>
+    <% if @user.errors.any? %>
+      <div>
+        <%= pluralize(@user.errors.count, "error") %> prevented the account from being created:
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email,
+        class: "form-control",
+        placeholder: "Enter email"
+      %>
+    </fieldset>
+   
+    <fieldset class="form-group">
+      <%= f.label :firstname, "First Name" %>
+      <%= f.text_field :firstname,
+        class: "form-control",
+        placeholder: "Enter First Name"
+      %>  
+    </fieldset>
+   
+   <fieldset class="form-group">
+      <%= f.label :lastname, "Last Name" %>
+      <%= f.text_field :lastname,
+        class: "form-control",
+        placeholder: "Enter Last Name"
+      %>  
+    </fieldset>
+      <div class="row">
+        <div class="col-sm-4">
+          <fieldset class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password,
+              class: "form-control",
+              placeholder: "Enter password"
+            %>
+            <small class="text-muted">Passwords must be at least six characters long.</small>
+          </fieldset>
+        </div>
+        <div class="col-sm-4">
+          <fieldset class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation,
+              class: "form-control",
+              placeholder: "Re-enter password"
+            %>
+          </fieldset>
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
+    
+    <%= f.submit "Submit",
+      class: "btn btn-darkgray"
+    %>
   <% end %>
-
-  <div>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-
-  <div>
-    <%= f.label :firstname, "First Name" %><br>
-    <%= f.text_field :firstname %>
-  </div>
-
-  <div>
-    <%= f.label :lastname, "Last Name" %><br>
-    <%= f.text_field :lastname %>
-  </div>
-
-  <div>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div>
-    <%= f.submit "Submit"%>
-  </div>
-
-<% end %>
+</form>

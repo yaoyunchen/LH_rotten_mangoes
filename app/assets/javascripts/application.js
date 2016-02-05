@@ -32,3 +32,6 @@ window.setTimeout(function() {
         $(this).remove(); 
     });
 }, 3000);
+
+$('body').css('overflow','hidden');
+$('body').css('position','fixed');

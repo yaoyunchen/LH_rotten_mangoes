@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'home/index'
+
   resource :session, only: [:new, :create, :destroy]
 
   resources :movies do
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
     resources :users
   end 
 
+  
 
-  root to: 'movies#index'
+  root to: 'home#index'
 end

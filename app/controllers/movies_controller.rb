@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.find(params[:id]).page params[:page]
+    @movie = Movie.find(params[:id])
   end
 
   def new

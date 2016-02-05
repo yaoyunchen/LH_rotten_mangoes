@@ -1,4 +1,8 @@
-<%= link_to "Back to all movies", movies_path %>
+<div class="container-fluid">
+  <%= link_to "Back to all movies", 
+  movies_path,
+  class: "btn btn-darkgray" %>
 
 <h2>Submit a movie!</h2>
 <%= render 'form' %>
+</div>
