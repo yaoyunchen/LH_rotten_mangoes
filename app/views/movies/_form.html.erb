@@ -59,10 +59,14 @@
       %>
     </div>
 
-    <div>
-      <%= f.submit "Submit",
-        class: "btn btn-darkgray"
-      %>
-    </div>
+    <%= f.submit "Submit",
+      class: "btn btn-darkgray"
+    %>  
+  
+    <%= link_to "Back to all movies", 
+      movies_path,
+      class: "btn btn-darkgray"
+    %>   
+  
   <% end %>
 </form>

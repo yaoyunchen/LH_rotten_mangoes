@@ -1,26 +1,56 @@
-<%= link_to "Back to movie", movie_path(@movie) %><br/>
+<div class="container-fluid">
+  <div class="row">
+    <h2>Write a review for <em><%= @movie.title %></em>.</h2>
+  </div>
 
-    <h2>Write a review of <em><%= @movie.title %></em>.</h2>
-
-    <%= form_for([@movie, @review]) do |f| %>
-      <% if @review.errors.any? %>
-        <div>
-          <%= pluralize(@review.errors.count, "error") %> prevented the review from being saved:
-          <ul>
-            <% @review.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
+  <div class="row">
+    
+      <%= form_for [@movie, @review] do |f| %>
+        <% if @review.errors.any? %>
+          <div>
+            <%= pluralize(@review.errors.count, "error") %> prevented the review from being saved:
+            <ul>
+              <% @review.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
+        <div class="row">
+          <div class="form-group">
+            <div class="col-sm-4">
+              <%= f.label :rating_out_of_ten %>
+              <%= f.number_field :rating_out_of_ten,
+                min: 1,
+                max: 10,
+                class: "form-control"
+              %>
+            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <%= f.label :text, "Review" %>
+              <%= f.text_area "text",
+                class: "form-control"
+              %>
+            </div>
+          </div>
+        </div>  
+        <%= f.submit "Submit",
+          class: "btn btn-darkgray"
+        %>
+        <%= link_to "Back to all movies", 
+          movies_path,
+          class: "btn btn-darkgray"
+        %>   
       <% end %>
+  </div>
+</div>
 
-      <div>
-        <%= f.label :text %><br>
-        <%= f.text_area "text" %>
-      </div>
-      <div>
-        <%= f.label :rating_out_of_ten %><br>
-        <%= f.number_field :rating_out_of_ten %>
-      </div>
-      <div><%= f.submit "Submit" %></div>
-    <% end %>
+   
+
+   
+

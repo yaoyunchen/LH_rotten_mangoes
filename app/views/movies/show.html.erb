@@ -1,23 +1,75 @@
-<%= link_to "Back to all movies", movies_path %>
-<!--
-<%= link_to image_tag(@movie.poster_image_url), movie_path(@movie) %>
--->
-<%= image_tag @movie.image.thumb.url %>
-
-<h2><%= @movie.title %> (<%= link_to "edit", edit_movie_path(@movie) %>, <%= link_to "delete", movie_path(@movie), method: :delete, confirm: "You sure?" %>)</h2>
-
-<h3><%= @movie.release_date %></h3>
-<h4>Dir. <%= @movie.director %> | <%= @movie.runtime_in_minutes %> minutes</h4>
-<p><%= @movie.description %></p>
-
-<h3>Reviews of <em><%= @movie.title %></em></h3>
-    <% if current_user %>
-      <% @movie.reviews.each do |review| %>
-        <p><%= review.text %></p>
-        <p><%= review.rating_out_of_ten %>/10</p>
-        <small>- <%= review.user.full_name %></small><br/>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 show-movie-img">
+      <%= image_tag @movie.image.resized.url
+      %>
+    </div>
+    <div class="col-sm-8">
+      <h1><%= @movie.title %></h1>
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <td><h5>Director:</h5></td>
+            <td><h5><%= @movie.director %></h5></td>
+          </tr>
+          <tr>
+            <td><h5>Release Date:</h5></td>
+            <td><h5><%= @movie.release_date %></h5></td>         
+          </tr>
+          <tr>
+            <td><h5>Runtime:</h5></td>
+            <td><h5><%= @movie.runtime_in_minutes %> minutes</h5></td>  
+          </tr>
+          <% if current_user.admin? %>
+            <tr>
+              <td><small>(<%= link_to "edit", edit_movie_path(@movie) %>, <%= link_to "delete", movie_path(@movie), method: :delete, confirm: "You sure?" %>)</small></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Description</h2>
+      <p><%= @movie.description %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Reviews of <em><%= @movie.title %></em></h3>
+      <% if current_user %>
+        <% @movie.reviews.each do |review| %>
+          <p><%= review.text %></p>
+          <p><%= review.rating_out_of_ten %>/10</p>
+          <small>- <%= review.user.full_name %></small><br/>
+        <% end %>
+        
+      <% else %>
+        <p>Please <%= link_to "log in", new_session_path %> to see reviews and add your own.</p> 
       <% end %>
-      <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
-    <% else %>
-      <p>Please <%= link_to "log in", new_session_path %> to see reviews and add your own.</p> 
-    <% end %>
+    </div>
+  </div>
+  <%= link_to "Write a review!", 
+    new_movie_review_path(@movie),
+    class: "btn btn-darkgray"
+  %>
+  <%= link_to "Back to all movies", 
+    movies_path,
+    class: "btn btn-darkgray"
+  %>   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

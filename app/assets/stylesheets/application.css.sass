@@ -35,30 +35,18 @@
     color: #cccccc
 
 
-body
-  padding-top: 70px
-  padding-bottom: 50px
-  background-image: url('/images/grayscale.jpg')
-  position: relative
-  margin: 0
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  color: white
-
-.dropdown-menu
-  background-color: #212121
-  color:  #FFFFFF
-
 #cust-navbar
-  background-color: #000000
-  color: #ffffff
-
+  background-color: black
+  color: white
+  .dropdown.open
+    background-color: white
+    color: black
+    
 
 .recent_added 
   color: #fff
   text-align: center
+  font-family: Impact, Charcoal, sans-serif
 
 .out_center
   text-align: center
@@ -66,10 +54,6 @@ body
     margin: auto
   
 
-
-/* Carousel base class */
-.carousel 
-  margin-bottom: 25px
 
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption 
@@ -85,15 +69,48 @@ body
   left: 0
   height: 250px
 
-
-tbody tr:hover td, .table-hover tbody tr:hover th 
-  opacity: 0.6
-
-.form-group
-  background-color: transparent
-  color: black
+.carousel-indicators
+  margin-bottom: 0
 
 
 .text-muted
   color: white
 
+body
+  padding-top: 70px
+  position: abosolute
+  margin: 0
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  color: black
+  background-color: white
+
+#navbar-title
+  a
+    color: #ff2600
+
+.home
+  background-image: url('/images/grayscale.jpg')
+  color: white  
+
+#header-img
+  img
+    max-width: 250px
+
+.show-movie-img
+  text-align: center
+  padding-top: 5%
+  img
+    -webkit-box-shadow: 5px 5px 15px 0px rgba(153,153,153,0.8)
+    -moz-box-shadow: 5px 5px 15px 0px rgba(153,153,153,0.8)
+    box-shadow: 5px 5px 15px 0px rgba(153,153,153,0.8)
+
+#popover-img
+  img
+    max-height: 100%
+    max-width: 100%
+
+.borderless td, .borderless th
+  border: none

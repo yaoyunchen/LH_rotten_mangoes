@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   resources :movies do
     resources :reviews, only: [:new, :create]
-  end
-  
+  end  
+
   resources :users, only: [:new, :create, :show]
   
   namespace :admin do

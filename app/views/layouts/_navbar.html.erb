@@ -7,13 +7,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div class="btn-group">
+      <div class="btn-group" id="navbar-title">
         <%= link_to "Rotten Mangoes", root_path, class: :"navbar-brand" %>
       </div>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <div class="nav navbar-left">
-        <%= link_to "All Movies", movies_path, class: "btn btn-gray navbar-btn" %>
+        <%= link_to "All Movies", movies_path, class: "btn btn-default navbar-btn" %>
       </div>
       <ul class="nav navbar-nav">
         <li class="dropdown">
@@ -36,11 +36,11 @@
           %>
           <% if current_user.admin? %>
             <%= link_to "Admin Panel", admin_users_path,
-              class: "btn btn-darkgray navbar-btn"
+              class: "btn btn-danger navbar-btn"
             %>
           <% end %>
         <% else %>
-           <%= link_to "Log In", new_session_path, class: "btn btn-default navbar-btn" %> <%= link_to "Sign Up", new_user_path, class: "btn btn-darkgray navbar-btn" %>
+           <%= link_to "Log In", new_session_path, class: "btn btn-danger navbar-btn" %> <%= link_to "Sign Up", new_user_path, class: "btn btn-darkgray navbar-btn" %>
         <% end %>
       </div>
 

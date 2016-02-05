@@ -22,7 +22,7 @@ $(document).ready(function() {
   $('.has-popover').popover({
     trigger: 'hover',
     animation: true,
-    container: 'body'
+    container: 'body',
   });
 });
 
@@ -35,3 +35,11 @@ window.setTimeout(function() {
 
 $('body').css('overflow','hidden');
 $('body').css('position','fixed');
+
+
+$(function() {
+    var xpathname = window.location.pathname;
+    if (xpathname == '/') {
+        $('body').addClass('home');
+    }
+});
