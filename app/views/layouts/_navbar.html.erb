@@ -39,6 +39,12 @@
               class: "btn btn-danger navbar-btn"
             %>
           <% end %>
+          <% if session[:admin_id] && session[:admin_id] != current_user.id %>
+            <%= link_to "Revert to Admin",
+              admin_revert_to_admin_path,
+              class: "btn btn-danger"
+            %>
+          <% end %>
         <% else %>
            <%= link_to "Log In", new_session_path, class: "btn btn-danger navbar-btn" %> <%= link_to "Sign Up", new_user_path, class: "btn btn-darkgray navbar-btn" %>
         <% end %>

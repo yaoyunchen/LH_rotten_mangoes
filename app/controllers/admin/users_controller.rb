@@ -1,5 +1,6 @@
-class Admin::UsersController < AdminsController
-  
+class Admin::UsersController < ApplicationController
+  before_action :require_admin, except: :revert
+
   def index
     @users = User.where.not(id: current_user.id).page(params[:page])
   end
@@ -47,7 +48,23 @@ class Admin::UsersController < AdminsController
 
   end
 
+  def spy_mode
+    session[:admin_id] = session[:user_id]
+    session[:user_id] = params[:id]
+    redirect_to root_path
+  end
+
+  def revert
+    session[:user_id] = session[:admin_id]
+    session[:admin_id] = nil
+    redirect_to admin_users_path
+  end
+  
   protected
+    def require_admin
+      redirect_to root_path unless current_user.admin?
+    end  
+
     def user_params
       params.require(:user).permit(
         :email,
@@ -58,5 +75,4 @@ class Admin::UsersController < AdminsController
         :admin
       )
     end
-
 end

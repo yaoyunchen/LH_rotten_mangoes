@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :users
+    post '/users/:id', to: 'users#spy_mode', as: 'spy_mode'
+    get '/revert', to: 'users#revert', as: 'revert_to_admin'
+
   end 
 
   
